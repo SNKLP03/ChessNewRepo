@@ -48,16 +48,16 @@ function Register() {
         sx={{
           width: { xs: '100%', md: '65%' },
           minHeight: { xs: '30vh', md: '100vh' },
-          bgcolor: '#cbeaf6', // Light cyan
+          bgcolor: '#1a1a1a', // Dark background
           position: 'relative',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: '#a1d8ef', // Darker cyan for text
+          color: '#ffffff', // White text
           overflow: 'hidden', // Clip overflow
         }}
       >
-        <Typography variant="h3" sx={{ fontFamily: 'Georgia, serif', zIndex: 1, color: '#000' }}>
+        <Typography variant="h3" sx={{ fontFamily: 'Georgia, serif', zIndex: 1, color: '#ffffff' }}>
           Chess Graphics
         </Typography>
         {/* Chessboard Image */}
@@ -72,6 +72,7 @@ function Register() {
             backgroundImage: `url(${ChessLoginImage})`, // Use imported image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            opacity: 0.3, // Make image more subtle in dark theme
           }}
         />
       </Box>
@@ -81,7 +82,7 @@ function Register() {
         sx={{
           width: { xs: '100%', md: '35%' },
           minHeight: { xs: '70vh', md: '100vh' },
-          bgcolor: '#a1d8ef', // Darker cyan
+          bgcolor: '#2d2d2d', // Dark gray background
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -89,7 +90,7 @@ function Register() {
           p: 3,
         }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: '#cbeaf6', fontFamily: 'Georgia, serif' }}>
+        <Typography variant="h5" gutterBottom sx={{ color: '#ffffff', fontFamily: 'Georgia, serif' }}>
           Join the Chess Arena
         </Typography>
         <Box component="form" onSubmit={handleRegister} sx={{ width: '100%', maxWidth: 300 }}>
@@ -101,7 +102,21 @@ function Register() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+              },
+            }}
           />
           <TextField
             label="Email"
@@ -112,7 +127,21 @@ function Register() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+              },
+            }}
           />
           <TextField
             label="Password"
@@ -123,7 +152,21 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+              },
+            }}
           />
           <TextField
             label="Confirm Password"
@@ -136,18 +179,43 @@ function Register() {
             required
             error={!!passwordError}
             helperText={passwordError}
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+                '&.Mui-error fieldset': {
+                  borderColor: '#ff6b6b',
+                },
+              },
+              '& .MuiFormHelperText-root': {
+                color: '#ff6b6b',
+              },
+            }}
           />
           <Button
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 2, bgcolor: '#cbeaf6', color: '#a1d8ef', '&:hover': { bgcolor: '#b3e0f2' } }}
+            sx={{ 
+              mt: 2, 
+              bgcolor: '#444444', 
+              color: '#ffffff', 
+              '&:hover': { bgcolor: '#555555' } 
+            }}
           >
             Register
           </Button>
         </Box>
-        <Typography variant="body2" sx={{ mt: 2, color: '#cbeaf6' }}>
+        <Typography variant="body2" sx={{ mt: 2, color: '#4caf50' }}>
           {authMessage}
         </Typography>
         <Grid container spacing={2} sx={{ mt: 2, width: '100%', maxWidth: 300 }}>
@@ -157,7 +225,14 @@ function Register() {
               startIcon={<GoogleIcon />}
               fullWidth
               onClick={handleGoogleSignIn}
-              sx={{ borderColor: '#cbeaf6', color: '#cbeaf6' }}
+              sx={{ 
+                borderColor: '#666666', 
+                color: '#ffffff',
+                '&:hover': {
+                  borderColor: '#888888',
+                  bgcolor: '#333333'
+                }
+              }}
             >
               Google
             </Button>
@@ -168,15 +243,22 @@ function Register() {
               startIcon={<FacebookIcon />}
               fullWidth
               onClick={handleFacebookSignIn}
-              sx={{ borderColor: '#cbeaf6', color: '#cbeaf6' }}
+              sx={{ 
+                borderColor: '#666666', 
+                color: '#ffffff',
+                '&:hover': {
+                  borderColor: '#888888',
+                  bgcolor: '#333333'
+                }
+              }}
             >
               Facebook
             </Button>
           </Grid>
         </Grid>
-        <Typography variant="body2" sx={{ mt: 2, color: '#cbeaf6' }}>
+        <Typography variant="body2" sx={{ mt: 2, color: '#b0b0b0' }}>
           Already have an account?{' '}
-          <Link to="/login" style={{ color: '#cbeaf6' }}>Login here</Link>
+          <Link to="/login" style={{ color: '#66b3ff' }}>Login here</Link>
         </Typography>
       </Box>
     </Box>

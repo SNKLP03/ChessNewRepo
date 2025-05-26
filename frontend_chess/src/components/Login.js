@@ -47,16 +47,16 @@ function Login({ onLoginSuccess }) {
         sx={{
           width: { xs: '100%', md: '65%' },
           minHeight: { xs: '30vh', md: '100vh' },
-          bgcolor: '#cbeaf6', // Light cyan
+          bgcolor: '#1a1a1a', // Dark background
           position: 'relative',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          color: '#a1d8ef', // Darker cyan for text
+          color: '#ffffff', // White text
           overflow: 'hidden', // Clip overflow
         }}
       >
-        <Typography variant="h3" sx={{ fontFamily: 'Georgia, serif', zIndex: 1, color: '#000' }}>
+        <Typography variant="h3" sx={{ fontFamily: 'Georgia, serif', zIndex: 1, color: '#ffffff' }}>
           Chess Graphics
         </Typography>
         {/* Chessboard Image */}
@@ -71,6 +71,7 @@ function Login({ onLoginSuccess }) {
             backgroundImage: `url(${ChessLoginImage})`, // Use imported image
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            opacity: 0.3, // Make image more subtle in dark theme
           }}
         />
       </Box>
@@ -80,7 +81,7 @@ function Login({ onLoginSuccess }) {
         sx={{
           width: { xs: '100%', md: '35%' },
           minHeight: { xs: '70vh', md: '100vh' },
-          bgcolor: '#bde4f4', // Darker cyan
+          bgcolor: '#2d2d2d', // Dark gray background
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -88,7 +89,7 @@ function Login({ onLoginSuccess }) {
           p: 3,
         }}
       >
-        <Typography variant="h5" gutterBottom sx={{ color: '#cbeaf6', fontFamily: 'Georgia, serif' }}>
+        <Typography variant="h5" gutterBottom sx={{ color: '#ffffff', fontFamily: 'Georgia, serif' }}>
           Enter the Chessboard
         </Typography>
         <Box component="form" onSubmit={handleLogin} sx={{ width: '100%', maxWidth: 300 }}>
@@ -100,7 +101,21 @@ function Login({ onLoginSuccess }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+              },
+            }}
           />
           <TextField
             label="Password"
@@ -111,18 +126,37 @@ function Login({ onLoginSuccess }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            sx={{ input: { color: '#cbeaf6' }, label: { color: '#cbeaf6' } }}
+            sx={{ 
+              input: { color: '#ffffff' }, 
+              label: { color: '#b0b0b0' },
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#555555',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#777777',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#ffffff',
+                },
+              },
+            }}
           />
           <Button
             type="submit"
             variant="contained"
             fullWidth
-            sx={{ mt: 2, bgcolor: '#cbeaf6', color: '#a1d8ef', '&:hover': { bgcolor: '#b3e0f2' } }}
+            sx={{ 
+              mt: 2, 
+              bgcolor: '#444444', 
+              color: '#ffffff', 
+              '&:hover': { bgcolor: '#555555' } 
+            }}
           >
             Login
           </Button>
         </Box>
-        <Typography variant="body2" sx={{ mt: 2, color: '#cbeaf6' }}>
+        <Typography variant="body2" sx={{ mt: 2, color: '#ff6b6b' }}>
           {authMessage}
         </Typography>
         <Grid container spacing={2} sx={{ mt: 2, width: '100%', maxWidth: 300 }}>
@@ -132,7 +166,14 @@ function Login({ onLoginSuccess }) {
               startIcon={<GoogleIcon />}
               fullWidth
               onClick={handleGoogleSignIn}
-              sx={{ borderColor: '#cbeaf6', color: '#cbeaf6' }}
+              sx={{ 
+                borderColor: '#666666', 
+                color: '#ffffff',
+                '&:hover': {
+                  borderColor: '#888888',
+                  bgcolor: '#333333'
+                }
+              }}
             >
               Google
             </Button>
@@ -143,15 +184,22 @@ function Login({ onLoginSuccess }) {
               startIcon={<FacebookIcon />}
               fullWidth
               onClick={handleFacebookSignIn}
-              sx={{ borderColor: '#cbeaf6', color: '#cbeaf6' }}
+              sx={{ 
+                borderColor: '#666666', 
+                color: '#ffffff',
+                '&:hover': {
+                  borderColor: '#888888',
+                  bgcolor: '#333333'
+                }
+              }}
             >
               Facebook
             </Button>
           </Grid>
         </Grid>
-        <Typography variant="body2" sx={{ mt: 2, color: '#cbeaf6' }}>
-          Don’t have an account?{' '}
-          <Link to="/register" style={{ color: '#cbeaf6' }}>Register here</Link>
+        <Typography variant="body2" sx={{ mt: 2, color: '#b0b0b0' }}>
+          Don't have an account?{' '}
+          <Link to="/register" style={{ color: '#66b3ff' }}>Register here</Link>
         </Typography>
       </Box>
     </Box>

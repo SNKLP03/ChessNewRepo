@@ -1,6 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, TextField, Button, List, ListItemButton, ListItemText } from '@mui/material';
+import { Box, Typography, TextField, Button, List, ListItemButton, ListItemText, ThemeProvider, createTheme } from '@mui/material';
+
+// Create dark theme
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#90caf9',
+    },
+    secondary: {
+      main: '#f48fb1',
+    },
+    background: {
+      default: '#121212',
+      paper: '#1e1e1e',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#b3b3b3',
+    },
+  },
+});
 
 function ImportGames({ username }) {
   const [chessUsername, setChessUsername] = useState('');
@@ -77,42 +98,103 @@ function ImportGames({ username }) {
   };
 
   return (
-    <Box sx={{ p: 4 }}>
-      <Typography variant="h2" sx={{ mb: 2 }}>
-        Import Games from Chess.com
-      </Typography>
-      <Typography>Logged in as: {username || 'Not logged in'}</Typography>
-      <form onSubmit={handleImport}>
-        <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-          <TextField
-            type="text"
-            placeholder="Enter Chess.com username"
-            value={chessUsername}
-            onChange={(e) => setChessUsername(e.target.value)}
-            required
-            fullWidth
-          />
-          <Button type="submit" variant="contained" disabled={isLoading}>
-            {isLoading ? 'Importing...' : 'Import Games'}
-          </Button>
-        </Box>
-      </form>
-      <Typography>{importMessage}</Typography>
-      {games.length > 0 && (
-        <Box>
-          <Typography variant="h3" sx={{ mt: 2 }}>
-            Imported Games:
-          </Typography>
-          <List>
-            {games.map((game, index) => (
-              <ListItemButton key={index} onClick={() => handleGameClick(game)}>
-                <ListItemText primary={game.title} />
-              </ListItemButton>
-            ))}
-          </List>
-        </Box>
-      )}
-    </Box>
+    <ThemeProvider theme={darkTheme}>
+      <Box sx={{ 
+        p: 4, 
+        backgroundColor: 'background.default', 
+        minHeight: '100vh',
+        color: 'text.primary'
+      }}>
+        <Typography variant="h2" sx={{ mb: 2, color: 'text.primary' }}>
+          Import Games from Chess.com
+        </Typography>
+        <Typography sx={{ color: 'text.secondary' }}>
+          Logged in as: {username || 'Not logged in'}
+        </Typography>
+        <form onSubmit={handleImport}>
+          <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+            <TextField
+              type="text"
+              placeholder="Enter Chess.com username"
+              value={chessUsername}
+              onChange={(e) => setChessUsername(e.target.value)}
+              required
+              fullWidth
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.23)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.5)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'primary.main',
+                  },
+                },
+                '& .MuiInputBase-input': {
+                  color: 'text.primary',
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'text.secondary',
+                },
+                '& .MuiInputBase-input::placeholder': {
+                  color: 'text.secondary',
+                  opacity: 1,
+                },
+              }}
+            />
+            <Button 
+              type="submit" 
+              variant="contained" 
+              disabled={isLoading}
+              sx={{
+                backgroundColor: 'primary.main',
+                '&:hover': {
+                  backgroundColor: 'primary.dark',
+                },
+                '&:disabled': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                  color: 'rgba(255, 255, 255, 0.3)',
+                },
+              }}
+            >
+              {isLoading ? 'Importing...' : 'Import Games'}
+            </Button>
+          </Box>
+        </form>
+        <Typography sx={{ color: 'text.primary' }}>{importMessage}</Typography>
+        {games.length > 0 && (
+          <Box>
+            <Typography variant="h3" sx={{ mt: 2, color: 'text.primary' }}>
+              Imported Games:
+            </Typography>
+            <List sx={{ backgroundColor: 'background.paper', borderRadius: 1 }}>
+              {games.map((game, index) => (
+                <ListItemButton 
+                  key={index} 
+                  onClick={() => handleGameClick(game)}
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    },
+                  }}
+                >
+                  <ListItemText 
+                    primary={game.title} 
+                    sx={{ 
+                      '& .MuiListItemText-primary': {
+                        color: 'text.primary',
+                      }
+                    }}
+                  />
+                </ListItemButton>
+              ))}
+            </List>
+          </Box>
+        )}
+      </Box>
+    </ThemeProvider>
   );
 }
 
